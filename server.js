@@ -7,12 +7,12 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 app.use(cors());
 
-const apiKey = process.env.API_KEY;
+//const apiKey = process.env.API_KEY;
 
-if (!apiKey) {
-  console.error('Error: Missing API Key in environment variables.');
-  process.exit(1);
-}
+//if (!apiKey) {
+//  console.error('Error: Missing API Key in environment variables.');
+//  process.exit(1);
+//}
 
 app.get('/', (req, res) => {
   res.send('Hello, world! The server is running.');
@@ -38,7 +38,7 @@ app.post('/chat', async (req, res) => {
       },
       {
         headers: {
-          Authorization: `Bearer ${apiKey}`,
+          //Authorization: `Bearer ${apiKey}`,
           'Content-Type': 'application/json',
         }
       }
