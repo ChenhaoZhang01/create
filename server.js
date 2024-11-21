@@ -18,6 +18,10 @@ app.get('/', (req, res) => {
   res.send('Hello, world! The server is running.');
 });
 
+app.get('/chat', async (req, res) => {
+  res.send('Hello, world! The server is running.');
+});
+
 app.post('/chat', async (req, res) => {
   const userInput = req.body.prompt;
 
