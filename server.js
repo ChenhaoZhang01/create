@@ -31,7 +31,7 @@ app.post('/chat', async (req, res) => {
 
   try {
     const response = await axios.post(
-      'https://chatgpt-api.shn.hk/v1/',
+      'https://api.pawan.krd/v1/chat/completions',
       {
         model: 'gpt-3.5-turbo', 
         messages: [{ role: 'user', content: userInput }],
