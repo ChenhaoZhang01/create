@@ -9,7 +9,7 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 
 // OpenAI API Key (keep it secure!)
-const apiKey = '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';
+const apiKey = process.env.API_KEY;
 app.get('/', (req, res) => {
   res.send('Hello, world! The server is running.');
 });
