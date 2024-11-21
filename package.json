@@ -1,18 +1,19 @@
 {
-  "name": "chatgpt-app",
+  "name": "heroku-chatbot",
   "version": "1.0.0",
-  "description": "A simple chat app using ChatGPT API",
+  "description": "A chatbot application using OpenAI API deployed on Heroku.",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
-    "express": "^4.18.1",
-    "axios": "^1.2.0"
+    "axios": "^1.3.4", // Replace with the latest version if needed
+    "express": "^4.18.2" // Replace with the latest version if needed
   },
   "engines": {
-  "node": "16.x"
+    "node": "16.x" // Specify the Node.js version compatible with your app
   },
-  "author": "",
+  "keywords": [],
+  "author": "Chenhao",
   "license": "ISC"
 }
