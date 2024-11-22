@@ -15,10 +15,6 @@ if (!apiKey) {
 }
 
 app.get('/', (req, res) => {
-  res.send('Hello, world! The server is running on chat.');
-});
-
-app.get('/chat', async (req, res) => {
   res.send('Hello, world! The server is running.');
 });
 
