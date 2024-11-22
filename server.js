@@ -15,7 +15,7 @@ if (!apiKey) {
 }
 
 app.get('/', (req, res) => {
-  res.send('Hello, world! The server is running.');
+  res.send('Hello, world! The server is running on chat.');
 });
 
 app.get('/chat', async (req, res) => {
@@ -31,10 +31,9 @@ app.post('/chat', async (req, res) => {
 
   try {
     const response = await axios.post(
-      'https://api.pawan.krd/cosmosrp/v1/chat/completions',
+      'https://api.openai.com/v1/chat/completions',
       {
         model: 'gpt-3.5-turbo', 
-        model="gpt-3.5-turbo",
         messages: [{ role: 'user', content: userInput }],
       },
       {
