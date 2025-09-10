@@ -27,7 +27,7 @@ def chat():
 
     try:
         # Use the Gemini API to generate a response
-        model = genai.GenerativeModel("gemini-1.5-flash")
+        model = genai.GenerativeModel("gemini-2.5-flash")
         response = model.generate_content(user_input)
 
         # Return the generated content as a response
@@ -38,3 +38,4 @@ def chat():
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 3000))  # Use Heroku's port if available
     app.run(host="0.0.0.0", port=port)
+
