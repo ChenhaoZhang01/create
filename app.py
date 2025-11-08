@@ -2,12 +2,13 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import google.generativeai as genai
 import os
+import base64
 
 app = Flask(__name__)
 CORS(app)
 
 # Configure the Gemini API key from environment variable
-GENAI_API_KEY = os.getenv("GENAI_API_KEY")  # Set this in Heroku
+GENAI_API_KEY = os.getenv("GENAI_API_KEY")
 if not GENAI_API_KEY:
     raise RuntimeError("Missing GENAI_API_KEY environment variable")
 
@@ -24,18 +25,35 @@ def chat():
         return jsonify({"error": "Prompt is required."}), 400
 
     user_input = data["prompt"]
-
+    
     try:
-        # Use the Gemini API to generate a response
+        # Use Gemini 2.5 Flash which supports vision
         model = genai.GenerativeModel("gemini-2.5-flash")
-        response = model.generate_content(user_input)
+        
+        # Check if image data is provided
+        if "image" in data and data["image"]:
+            image_data = data["image"].get("data")  # base64 string
+            mime_type = data["image"].get("mimeType", "image/jpeg")
+            
+            if image_data:
+                # Gemini expects image as Part with inline_data
+                image_part = {
+                    "mime_type": mime_type,
+                    "data": image_data  # base64 string (no need to decode)
+                }
+                # Send prompt + image to Gemini
+                response = model.generate_content([user_input, image_part])
+            else:
+                # Text only
+                response = model.generate_content(user_input)
+        else:
+            # Text only
+            response = model.generate_content(user_input)
 
-        # Return the generated content as a response
         return jsonify({"response": response.text})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 3000))  # Use Heroku's port if available
+    port = int(os.environ.get("PORT", 3000))
     app.run(host="0.0.0.0", port=port)
-
